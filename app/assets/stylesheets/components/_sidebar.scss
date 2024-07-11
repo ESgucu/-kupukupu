@@ -1,0 +1,48 @@
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  display: flex;
+  justify-content: space-between;
+
+  li{
+    font-size: large;
+    margin-left: 6px;
+    text-align: start;
+    margin-block: 20px;
+    color: $pale-green;
+    padding: 20px;
+    text-decoration: none;
+    list-style: none;
+  }
+
+  .menu{
+    background-color: $primary;
+    // flex-grow: 1;
+    background: linear-gradient(3deg, rgba(61, 76, 73, 0.76), #03403d); /* Subtle green gradient */
+
+    a {
+      font-size: large;
+      color: $pale-green;
+    }
+  }
+}
+
+.sidebar a {
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+  width: 30vw;
+  transition: 0.3s;
+}
+
+.logout-link {
+  position: fixed;
+  bottom: 0;
+  font-size:smaller;
+}

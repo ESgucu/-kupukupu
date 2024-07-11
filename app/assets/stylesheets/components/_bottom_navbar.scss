@@ -1,0 +1,74 @@
+$bottom-nav-height: 9vh;
+
+.bottom-nav {
+  width: 100vw;
+  height: $bottom-nav-height;
+  border-radius: 20px 20px 0px 0px;
+  background-color: $primary;
+  position: fixed;
+  bottom: 0;
+  background: linear-gradient(3deg, rgba(61, 76, 73, 0.76), #03403d); /* Subtle green gradient */
+  z-index: 2;
+  transition: opacity 1s ease-out, transform 0.5s ease;
+  opacity: 1;
+  animation: slideUp 0.5s ease forwards; /* Slide up animation */
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.bottom-nav.d-none {
+  opacity: 0;
+  pointer-events: none;
+  animation: slideDown 0.5s ease forwards; /* Slide down animation */
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.bottom-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-inline: 14vw;
+  padding: 10px;
+  margin-top: 2vh;
+  animation: fadeInIcons 0.5s ease forwards; /* Fade in icons animation */
+}
+
+@keyframes fadeInIcons {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bottom-icons i {
+  opacity: 80%;
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition for hover effect */
+}
+
+.bottom-icons i:hover {
+  opacity: 1;
+  transform: scale(1.2); /* Enlarge icons on hover */
+}

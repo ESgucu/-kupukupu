@@ -1,0 +1,26 @@
+<div class="home-screen overflow-auto">
+  <div class="header-home">
+    <img id="header-home-image" src="https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bali" class="header-image">
+    <div class="header-text">
+      <div class="" style="">
+        <% if user_signed_in? %>
+          <h1>Welcome, <%= current_user.name %>! 😊</h1>
+        <% else %>
+          <h1>Welcome to Kupu Kupu</h1>
+        <% end %>
+      </div>
+        <h1>Your Location</h1>
+        <h2 id="location">Bali</h2>
+    </div>
+  </div>
+  <div class="section">
+    <div class="steps-title">
+      <h2 class="d-flex text-center justify-content-center align-items-center" style="max-width:70%">Discover where you all want to go next!</h2>
+    </div>
+    <%= image_tag "home_stepsKK3.png", style: "width:85vw; margin-inline:auto; margin-top:30px" %>
+    <div class="cta-center">
+      <h2 class="">Click Below To Get Started</h2>
+      <a class="home-plus-button-primary" href="/groups/new"><i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i></a>
+    </div>
+  </div>
+</div>

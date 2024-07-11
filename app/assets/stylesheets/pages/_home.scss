@@ -1,1 +1,266 @@
-// Specific CSS for your home-page
+.home-screen {
+  display: flex-start;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(255,255,255,0.7105435924369747) 82%, rgba(3,64,61,0.2987788865546218) 100%);
+  overflow-y: visible;
+}
+
+.bg-image-logo {
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  opacity: 40%;
+}
+
+
+.header-home {
+  position: relative;
+  width: 100%;
+  height: 45vh;
+}
+
+#header-home-image {
+  width: 100%;
+  height: 45vh;
+  object-fit: cover;
+  display: block;
+  border-radius: 0px 0px 20px 20px;
+}
+
+#header-home-image.animated {
+  animation: zoomIn 10s ease-in-out infinite;
+}
+
+@keyframes zoomIn {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+
+.header-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  z-index: 2;
+  text-shadow: 0 5px 9px rgba(0, 0, 0, 0.15);
+  animation: fadeInDown 1.5s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-text h2 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: normal;
+  color: #ffffff;
+  text-shadow: 0 5px 9px rgba(0, 0, 0, 0.25);
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 5px 9px rgba(0, 0, 0, 0.35);
+  text-align: start;
+}
+
+/* Steps title */
+.steps-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5em;
+  color: #03403D;
+  margin-top: 20px;
+  animation: fadeInUp 2s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Steps container */
+.steps-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 20px;
+}
+
+.step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 30%;
+  height: 150px;
+  background: linear-gradient(135deg, #d0e6a5, #a4cffa);
+  color: white;
+  border-radius: 10px;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  animation: bounceIn 1s ease-in-out;
+}
+
+@keyframes bounceIn {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.step p {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: color 0.3s;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.step:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.step:nth-child(1) {
+  background: linear-gradient(135deg, #d0e6a5, #a4cffa);
+}
+
+.step:nth-child(1):hover {
+  background: linear-gradient(135deg, #a4cffa, #d0e6a5);
+}
+
+/* Step 2: Medium Olive */
+.step:nth-child(2) {
+  background: linear-gradient(135deg, #9bc53d, #a4cffa);
+}
+
+.step:nth-child(2):hover {
+  background: linear-gradient(135deg, #a4cffa, #9bc53d);
+}
+
+/* Step 3: Dark Olive */
+.step:nth-child(3) {
+  background: linear-gradient(135deg, #6c7b4b, #8b9a74);
+}
+
+.step:nth-child(3):hover {
+  background: linear-gradient(135deg, #8b9a74, #6c7b4b);
+}
+
+/* Button styles */
+.home-plus-button-primary {
+  background-color: $primary;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+}
+
+/* Section styles */
+.section {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 400px - 9vh);
+  .cta-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 140px;
+    padding-top: 20px;
+
+    h2 {
+      font-size: large;
+      margin-top: 35px;
+      animation: fadeInUp 2s ease-in-out;
+    }
+  }
+}
+
+/* Info card styles */
+.home-info-card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-inline: 20px;
+  align-items: center;
+  text-align: center;
+  width: 30%;
+  height: 16vh;
+  color: white;
+  border-radius: 50%;
+  background-color: $primary;
+  opacity: 50%;
+  padding: 12px;
+  box-shadow: -10px 12px 10px 0px rgba(0,0,0,0.75);
+  margin: 8px;
+  z-index: 0;
+  animation: fadeIn 1.5s ease-in-out;
+
+  h2 {
+    font-size: large;
+    text-align: center;
+    text-shadow: 4px 2px 2px rgba(6, 0, 0, 0.78);
+    color: $white;
+    position: relative;
+    z-index: 2;
+  }
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100px;
+    border-radius: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

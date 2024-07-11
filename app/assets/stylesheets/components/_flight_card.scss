@@ -1,0 +1,68 @@
+.flight-container{
+  // display: flex;
+  width: 90vw;
+  height: 180px;
+  background: linear-gradient(100deg, rgba(78,193,194,0.38561362044817926) 23%, rgba(3,64,61,0.5872942927170868) 73%);
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-inline: auto;
+  margin-bottom: 10vh;
+  padding: 15px;
+
+  p {
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+
+  h1{
+    font-size: 32px;
+    font-weight: bold;
+  }
+  h2{
+    font-size: 28px;
+  }
+  hr{
+    border-top: 2px dashed rgb(255, 255, 255);
+  }
+  i {
+    display: inline-block;
+    padding: 25px;
+    border: none;
+    border-top: 3px dotted white;
+    border-radius: 100%
+  }
+
+}
+
+.city-details-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 20px;
+}
+
+.city-details{
+  display: flex;
+  flex-direction: column;
+}
+
+.flight-specifics-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 20px;
+
+  h3{
+    font-size: 22px;
+  }
+
+  h2{
+    font-size: 28px;
+  }
+}
+
+.p {
+  padding-left: 24px;
+}

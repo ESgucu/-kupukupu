@@ -1,0 +1,23 @@
+<div class="landing-page">
+  <div class="landing-logo">
+    <%= image_tag "KK_logo_H1_lg.png", style: "width: 50vw" %>
+  </div>
+  <div class="landing-text">
+    Find the best place to travel, together
+  </div>
+  <div class="button-container">
+    <div class="button">
+      <div id="get-started">
+        Get Started
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('.bottom-nav').classList.add('d-none');
+      document.getElementById('get-started').addEventListener('click', function() {
+          window.location.href = '/pages/home';
+      });
+  });
+</script>

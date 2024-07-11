@@ -1,0 +1,20 @@
+.destination-card-lg{
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: fit-content;
+  border-radius: 10px 0px 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  h2 {
+    padding: 8px;
+    left: 0;
+    top: 0;
+    z-index: 2;
+  }
+
+  img {
+    object-fit: cover;
+    z-index: 1;
+  }
+}

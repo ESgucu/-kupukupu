@@ -1,0 +1,16 @@
+.form-input {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  justify-content: space-between;
+  margin-block: 10px;
+  margin-inline: 30px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  list-style-type: none;
+  text-decoration: none;
+
+  a {
+    text-decoration: none;
+  }
+}

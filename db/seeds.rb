@@ -1,51 +1,123 @@
-text = "loadingloadingloadingloadingloadingloadingİzmir Barcelona, SpainTickets from 280 €loadingİzmir Tirana, AlbaniaTickets from 258 €loadingİzmir Amsterdam, NetherlandsTickets from 374 €Map is not supported. Please update your browser.loadingloadingloadingloadingloadingloadingloadingloadingloadingloadingloadingİzmir London, United KingdomTickets from 248 €loadingİzmir Frankfurt, GermanyTickets from 349 €loadingİzmir Vienna, AustriaTickets from 225 €loadingİzmir Paris, FranceTickets from 367 €loadingİzmir Munich, GermanyTickets from 315 €loadingİzmir Athens, GreeceTickets from 351 €Explore trending destinations on the mapExplore maploadingİzmir Zürich, SwitzerlandTickets from 354 €loadingİzmir Tbilisi, GeorgiaTickets from 193 €loadingİzmir Prague, CzechiaTickets from 319 €loadingİzmir Antalya, TurkeyTickets from 125 €loadingİzmir Düsseldorf, GermanyTickets from 263 €loadingİzmir Brussels, BelgiumTickets from 261 €loadingİzmir Hamburg, GermanyTickets from 336 €loadingİzmir Cologne, GermanyTickets from 269 €loadingİzmir Skopje, Republic of North MacedoniaTickets from 229 €loadingİzmir Trabzon, TurkeyTickets from 191 €loadingİzmir Belgrade, SerbiaTickets from 281 €loadingİzmir Stuttgart, GermanyTickets from 286 €loadingİzmir Istanbul, TurkeyTickets from 135 €loadingİzmir Baku, AzerbaijanTickets from 286 €loadingİzmir Bucharest, RomaniaTickets from 77 €loadingİzmir Ankara, TurkeyTickets from 141 €loadingİzmir Berlin, GermanyTickets from 299 €loadingİzmir Hanover, GermanyTickets from 320 €loadingİzmir Kayseri, TurkeyTickets from 154 €loadingİzmir Northern Cyprus, Unknown RegionTickets from 172 €loadingİzmir Adana, TurkeyTickets from 153 €"
-from = "İzmir"
-# Extract city names and prices using a regular expression
-destinations = text.scan(/#{from} ([^,]+, [^T]+)Tickets from (\d+ €)/)
-puts destinations
+require 'benchmark'
 
-# Create an HTML string with Bootstrap cards
-html_content = <<-HTML
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <title>Travel Destinations</title>
-</head>
-<body>
-  <div class="container mt-5">
-    <div class="row">
-HTML
+def run_script_and_measure_time
+  # Start measuring time
+  time = Benchmark.measure do
 
-destinations.each do |destination|
-  city_country, price = destination
-  html_content += <<-HTML
-      <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">#{city_country}</h5>
-            <p class="card-text">Price: #{price}</p>
-          </div>
-        </div>
-      </div>
-  HTML
+require 'open-uri'
+require 'nokogiri'
+require 'selenium-webdriver'
+require 'json'
+
+options = Selenium::WebDriver::Chrome::Options.new
+options.add_argument('--disable-gpu')
+options.add_argument('--no-sandbox')
+
+driver = Selenium::WebDriver.for :chrome, options: options
+
+city = "izmir"
+country = "turkey"
+travel_date = "2024-08-02"
+return_date = "2024-08-11"
+
+url = "https://www.kiwi.com/en/search/tiles/#{city}-#{country}/anywhere/#{travel_date}/#{return_date}?sortAggregateBy=price"
+
+driver.get(url)
+
+wait = Selenium::WebDriver::Wait.new(timeout: 20)
+max_retries = 3
+retries = 0
+
+begin
+  begin
+    accept_button = wait.until { driver.find_element(css: "button[data-test='CookiesPopup-Accept']") }
+    accept_button.click
+    wait.until { driver.find_element(css: '.bg-picture-card-overlay') }
+  rescue Selenium::WebDriver::Error::StaleElementReferenceError => e
+    retries += 1
+    if retries <= max_retries
+      puts "Retrying due to stale element reference: #{e.message}"
+      retry
+    else
+      puts "Max retries reached: #{e.message}"
+      driver.quit
+      exit
+    end
+  end
+
+
+  page_source = driver.page_source
+  driver.quit
+
+
+  # Save the page source to a file for inspection
+  File.open("page_source.html", "w") { |file| file.write(page_source) }
+
+  html_doc = Nokogiri::HTML(page_source)
+  elements = html_doc.css('.group.relative.flex.h-full.w-full.flex-col.justify-end.overflow-hidden.rounded-large.p-sm.shadow-action.hover\\:shadow-action-active')
+  # puts elements
+
+  puts "Found #{elements.size} elements."
+
+  destinations_data = []
+  # destinations_prices = {} # Initialize an empty hash to store the destinations and prices
+
+  if elements.empty?
+    puts "No elements found with the class '.group.relative.flex.h-full.w-full.flex-col.justify-end.overflow-hidden.rounded-large.p-sm.shadow-action.hover\\:shadow-action-active'."
+  else
+    elements.each do |element|
+      image_url = element.at_css('img')&.attr('srcset') if element.at_css('img')
+      # Splitting text by 'loading' to separate individual destinations
+      puts image_url
+      text = element.text.split('loading')
+      next_text = []
+      text.each do |line|
+        updated = I18n.transliterate(line).split('?')[1]
+        currency = I18n.transliterate(line).split('?')[2]
+        with_currency = "#{updated} #{currency}"
+        next_text << with_currency
+      end
+      # puts next_text
+      text = next_text.compact
+
+      # Split the text into lines
+      lines = text
+
+      # Iterate over each line
+      lines.each do |line|
+        # Ensure the line is not an array
+        line = line.join if line.is_a?(Array)
+        # puts line
+        next if line.nil? || line.strip.empty?
+        # Match the city, country, and price using a regex
+        if match_data = line.match(/(.+?), (.+?)Tickets from ([\d,]+)(.*)/)
+          city_country = "#{match_data[1].strip}, #{match_data[2].strip}"
+          price = match_data[3].gsub(',', '').to_i
+          currency = match_data[4]
+          # puts match_data
+          destination_price = {
+            'city_country' => city_country,
+            'price' => price,
+            'currency' => currency,
+            'img' => image_url
+          }
+          # puts destination_price
+          destinations_data << destination_price
+        end
+      end
+    end
+  end
+  puts destinations_data
+rescue Selenium::WebDriver::Error::NoSuchElementError, Selenium::WebDriver::Error::TimeoutError => e
+  puts "Element not found or timeout: #{e.message}"
+  driver.quit
+  exit
+end
 end
 
-html_content += <<-HTML
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
-HTML
-
-# Write the HTML content to a file
-File.open("destinations.html", "w") do |file|
-  file.write(html_content)
+# Output the time taken
+puts "Code execution took #{time.real.round(2)} seconds."
 end
 
-puts "HTML file has been created successfully."
+# Call the method to run the script and measure time
+run_script_and_measure_time

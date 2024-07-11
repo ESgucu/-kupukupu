@@ -1,0 +1,112 @@
+.form-button-light{
+  display: flex;
+  margin: auto;
+  place-content: center;
+  width: 50vw;
+  height: 50px;
+  background-color: $light-green;
+  border-radius: 20px 20px 20px 20px;
+  font-size: medium;
+  font-style: normal;
+  color: $primary;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  place-items: center;
+  text-decoration: none;
+
+  &:hover{
+    background: $green;
+    color: $light-green;
+    transition: .1s;
+  }
+}
+
+.form-button-primary{
+  display: flex;
+  margin: auto;
+  place-content: center;
+  width: 50vw;
+  height: 50px;
+  background-color: $green;
+  border-radius: 20px 20px 20px 20px;
+  font-size: medium;
+  font-style: normal;
+  color: $light-green;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  place-items: center;
+  text-decoration: none;
+
+  &:hover{
+    background: $light-green;
+    color: $green;
+    transition: .5s ease;
+  }
+}
+
+.plus-button-primary{
+ background-color: transparent;
+//  border-radius: 100%;
+ width: 40px;
+ height: 40px;
+ font-size: 22px;
+//  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+ place-content: center;
+ align-items:center;
+ text-align:center;
+ outline: none;
+ border: none;
+}
+
+
+
+.back-button{
+  color: #03403D;
+  position: absolute;
+  left: 7vw;
+  top: 11vh;
+
+  i {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}
+
+.edit-button{
+  color: #03403D;
+  position: absolute;
+  right: 7vw;
+  top: 11vh;
+
+  i {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}
+
+.pill-md{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-direction: row;
+  margin-inline: auto;
+  place-content: center;
+  padding-inline: 6px;
+  max-width: 60vw;
+  height: 40px;
+  background-color: $light-green;
+  border-radius: 20px 20px 20px 20px;
+  font-size: medium;
+  font-style: normal;
+  color: $primary;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  place-items: center;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.trash-button-primary{
+  // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  place-content: center;
+  outline: none;
+  border: none;
+  display: flex;
+  place-items: center;
+  margin: 8px auto;
+}

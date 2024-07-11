@@ -1,0 +1,13 @@
+.form-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+  padding: 15px;
+  margin-inline: 10vw;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  h1{
+    text-align: center;
+  }
+}

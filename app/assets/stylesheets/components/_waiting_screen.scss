@@ -1,0 +1,18 @@
+.waiting-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, rgba(78,193,194,0.38561362044817926) 23%, rgba(3,64,61,0.5872942927170868) 73%);
+  text-shadow: 0 5px 9px rgba(0, 0, 0, 0.25);
+
+
+  h1{
+    margin-inline: auto;
+    font-size: 32px;
+    text-align: center;
+    width: 80vw;
+  }
+}

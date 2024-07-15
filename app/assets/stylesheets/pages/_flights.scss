@@ -1,27 +1,50 @@
+// .container {
+//   margin: 0 auto;
+//   overflow-y: auto;
+//   overflow-x: hidden;
+// }
+
+// .container h1, .container h2 {
+//   display: flex;
+//   text-align: center;
+//   width: 70vw;
+//   margin-inline: auto;
+//   padding-block: 10px;
+// }
+
+// .container h1 {
+//   font-size: 34px;
+//   font-weight: bold;
+//   color: #026252;
+// }
+
+// .container h2 {
+//   font-size: 16px;
+//   color: #555;
+//   font-weight: normal;
+// }
+
+/* Default styles */
 .container {
   margin: 0 auto;
   overflow-y: auto;
   overflow-x: hidden;
+  max-width: 1000px; /* Adjust max-width as per your design */
 }
 
-.container h1, .container h2 {
-  display: flex;
-  text-align: center;
-  width: 70vw;
-  margin-inline: auto;
-  padding-block: 10px;
+/* Responsive styles for smaller screens (up to 768px) */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%; /* Adjust width percentage for smaller screens */
+    padding: 0 10px; /* Add padding to sides for better readability */
+  }
 }
 
-.container h1 {
-  font-size: 34px;
-  font-weight: bold;
-  color: #026252;
-}
-
-.container h2 {
-  font-size: 16px;
-  color: #555;
-  font-weight: normal;
+/* Additional media queries as needed for other screen sizes */
+@media (max-width: 480px) {
+  .container {
+    font-size: 14px; /* Example: Reduce font size for smaller screens */
+  }
 }
 
 .cart-item {

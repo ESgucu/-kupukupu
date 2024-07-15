@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_06_061608) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_14_190054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,8 +38,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_06_061608) do
   end
 
   create_table "memberships", force: :cascade do |t|
-    t.datetime "travel_date"
-    t.datetime "return_date"
+    t.date "travel_date"
+    t.date "return_date"
     t.string "departure"
     t.bigint "group_id", null: false
     t.bigint "user_id", null: false

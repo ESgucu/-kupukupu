@@ -13,11 +13,5 @@
     </div>
   </div>
 </div>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector('.bottom-nav').classList.add('d-none');
-      document.getElementById('get-started').addEventListener('click', function() {
-          window.location.href = '/pages/home';
-      });
-  });
-</script>
+<%= javascript_pack_tag 'index' %>
+<%console%>

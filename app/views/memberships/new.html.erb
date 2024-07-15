@@ -1,0 +1,34 @@
+<div class="back-button">
+  <%= link_to :back do %>
+    <i class="fa-solid fa-arrow-left fa-2xl"></i>
+  <% end %>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h1 class="my-3">Add a Traveller</h1>
+      <%= simple_form_for(@membership, url: group_memberships_path(params[:group_id])) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :name %>
+          <%= f.input :travel_date %>
+          <%= f.input :return_date %>
+          <%= f.input :departure %>
+        </div>
+        <div class="d-flex justify-content-center">
+          <%= link_to new_group_membership_path(params[:group_id]), class: "home-plus-button-primary" do %>
+            <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+          <% end %>
+          <%# <a class="home-plus-button-primary" href="/memberships/new"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></a> %>
+          <h5 class="p-3">Add More Travelers</h5>
+        </div>
+        <div class="form-actions justify-content-center">
+          <%= f.button :submit,  "Create a Trip", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= javascript_pack_tag 'travelerInfo' %>
+</div>
+<% console %>
+<% console %>

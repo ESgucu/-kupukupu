@@ -1,56 +1,41 @@
 class GroupsController < ApplicationController
   def index
-    @memberships = Membership.all
+    # @current_membership = Membership.where(user: current_user)
     @groups = Group.all
+    groups = Group.where(user: current_user)
+    if current_user.group_id.nil?
+      redirect_to new_group_path()
+    else
+      @groups = groups
+    end
+    # @groups = Group.where(user: current_user)
+    #if not nil, show all the groups of this user
+    #if not nil and only one ->  not a .each in index.
+  end
+
+  def show
+
   end
 
   def new
     @group = Group.new
-    # @user = current_user
-    # @membership = Membership.new
-  end
-
-  def create
-    # @membership = Membership.new(membership_params)
-    @group = Group.new(group_params)
-    # @group.user_id = current_user.id
-    # @membership.user = current_user
-    # @membership.group = @group
-    if @group.save
-      # if @membership.save
-        redirect_to new_group_membership_path(group_id: @group.id), notice: 'Group was successfully created. Now you can update additional details.'
-      # else
-      #   render :new
-      # end
-    else
-      render :new
+    if @group
+      name = params[:groupName]
+      inv_code = SecureRandom.hex(10).to_s
+      @group = Group.new(name:name, inv_code: inv_code, user_id: current_user.id)
     end
   end
 
-  # def edit
-  #   @group = Group.find(params[:id])
-  #   @membership =
+  # def create
   # end
 
-  # def update
-  #   @group = Group.find(params[:id])
-  #   if @group.update(group_params)
-  #     redirect_to group_path(@group)
-  #   else
-  #     render :edit
-  #   end
+  # def show
   # end
-
-  def show
-    @group = Group.find(params[:id])
-    @memberships = Membership.where(group_id: @group)
-  end
 
   def group_params
     params.require(:group).permit(:name, :inv_code)
   end
 
   def membership_params
-    params.require(:group).permit(:group, :user)
   end
 end

@@ -1,33 +1,26 @@
-<div class="group-index-container" style='padding-bottom: 60px;'>
-  <div class="pt-5">
-    <h1 class="my-5 text-center">My Trips</h1>
-    <%# Dropdown %>
-    <ul
-        class=""
-        style="text-decoration:none; list-style-type:none; padding-inline-start:0"
-        data-controller="sortable"
-        data-sortable-animation-value="150">
-      <% @memberships.each do |membership| %>
-        <li class="">
-          <div class="collapsible dropdown"
-                    data-controller="collapsible-dropdown"
-                    data-action="click->collapsible-dropdown#toggle">
-            <div class="d-flex justify-content-between">
-              <%= link_to membership.group.name, group_path(membership.group), class:"" %>
-              <i class="fa-solid fa-sort-down fa-xl align-self-baseline pt-1" style="color: #03403d;"></i>
-            </div>
-          </div>
-          <%# Dropdown Content %>
-          <ul class="content">
-            <li class="list-item">Date: 12/5/24 - 17/5/24</li>
-            <li class="">Members: member1, member2, member3</li>
-            <li class="">Status: Confirmed</li>
-          </ul>
-        </li>
-        <%#  %>
-      <% end %>
-    </ul>
-    <%= link_to 'Create a Trip', new_group_path, class:"form-button-primary my-5"  %>
+<div class="back-button">
+  <%= link_to :back do %>
+    <i class="fa-solid fa-arrow-left fa-2xl"></i>
+  <% end %>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h1 class="my-3">Your Groups</h1>
+      <ul><% @groups.each do |group|%>
+          <li><%= group.name %><br>
+            Edit Group</li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="col-12">
+      <h1 class="my-3">Create a Trip</h1>
+      <form action="/groups/new">
+        <label for="group">Create a Trip</label>
+        <input class="form-inputs" type="text" name="group" placeholder = "Trip Name">
+        <input type="submit" class="btn btn-primary">
+      </form>
+    </div>
   </div>
 </div>
 <%console%>

@@ -6,29 +6,21 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12">
-      <h1 class="my-3"> <%= @group.name %> Trip</h1>
-      <% @memberships.each do |membership| %>
-        <div class="form-inputs">
-          <%= membership.user.name %>
-        </div>
-        <div class="form-inputs">
-          <%= membership.departure %>
-        </div>
-        <div class="form-inputs">
-          <%= membership.travel_date %>
-        </div>
-        <div class="form-inputs">
-          <%= membership.return_date %>
-        </div>
-        <div class="form-actions">
-          <%= button_to "Modify", edit_group_membership_path(membership), class: "btn btn-primary" %>
-        </div>
-        <div class="form-actions">
-          <%# <%= button_to "Go to Destinations", destinations_path(membership), class: "btn btn-primary" %> %>
-        </div>
-      <% end %>
+      <h1 class="my-3">Your Groups</h1>
+      <ul><% @groups.each do |group|%>
+          <li><%= group.name %><br>
+            Edit Group</li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="col-12">
+      <h1 class="my-3">Create a Trip</h1>
+      <form action="/groups/new">
+        <label for="group">Create a Trip</label>
+        <input class="form-inputs" type="text" name="group" placeholder = "Trip Name">
+        <input type="submit" class="btn btn-primary">
+      </form>
     </div>
   </div>
 </div>
-<%= javascript_pack_tag 'travelerInfo' %>
 <%console%>

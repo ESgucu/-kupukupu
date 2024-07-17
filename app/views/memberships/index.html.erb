@@ -7,6 +7,7 @@
   <div class="row justify-content-center">
     <div class="col-12">
       <h1 class="my-3">Plan your Trip</h1>
+      <form action="/"></form>
       <%= simple_form_for(@membership, url: new_group_membership_path(params[:group_id])) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">

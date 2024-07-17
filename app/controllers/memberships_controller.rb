@@ -1,7 +1,7 @@
 class MembershipsController < ApplicationController
   def index
-    @memberships = Membership.all  # This retrieves all memberships
-    @membership = Membership.new
+    # @memberships = Membership.all  # This retrieves all memberships
+    # @membership = Membership.new
     # @group = params[:group_id]
     # @membership = Membership.where(user: current_user, group: @group)
   end
@@ -13,7 +13,11 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.new(membership_params)
     @membership.group_id = params[:group_id]
-    @membership.user = current_user
+    if @membership.user.nil?
+      @membership.user = current_user
+    else
+      @membership.user.name = params[:name]
+    end
     @group = params[:group_id]
     if @membership.save
       redirect_to group_path(@group)
@@ -23,12 +27,12 @@ class MembershipsController < ApplicationController
   end
 
   def update
-    @membership = Membership.find(params[:id])
-    if @membership.update(membership_params)
-      redirect_to membership_path(@membership)
-    else
-      render :edit
-    end
+    # @membership = Membership.find(params[:id])
+    # if @membership.update(membership_params)
+    #   redirect_to membership_path(@membership)
+    # else
+    #   render :edit
+    # end
   end
 
 

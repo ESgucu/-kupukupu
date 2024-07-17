@@ -1,26 +1,27 @@
 class GroupsController < ApplicationController
   def index
-    @memberships = Membership.where(user: current_user)
+    @memberships = Membership.all
+    @groups = Group.all
   end
 
   def new
     @group = Group.new
-    @user = current_user
-    @membership = Membership.new
+    # @user = current_user
+    # @membership = Membership.new
   end
 
   def create
-    @membership = Membership.new(membership_params)
+    # @membership = Membership.new(membership_params)
     @group = Group.new(group_params)
-    @group.user_id = current_user.id
-    @membership.user = current_user
-    @membership.group = @group
+    # @group.user_id = current_user.id
+    # @membership.user = current_user
+    # @membership.group = @group
     if @group.save
-      if @membership.save
-        redirect_to group_memberships_path(group_id: @group.id), notice: 'Group was successfully created. Now you can update additional details.'
-      else
-        render :new
-      end
+      # if @membership.save
+        redirect_to new_group_membership_path(group_id: @group.id), notice: 'Group was successfully created. Now you can update additional details.'
+      # else
+      #   render :new
+      # end
     else
       render :new
     end
@@ -41,7 +42,8 @@ class GroupsController < ApplicationController
   # end
 
   def show
-
+    @group = Group.find(params[:id])
+    @memberships = Membership.where(group_id: @group)
   end
 
   def group_params

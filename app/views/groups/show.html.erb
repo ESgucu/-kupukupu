@@ -6,15 +6,25 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12">
-      <h1 class="my-3">Your Trips</h1>
-      <%= simple_form_for(@group) do |f| %>
-        <%= f.error_notification %>
+      <h1 class="my-3"> <%= @group.name %> Trip</h1>
+      <% @memberships.each do |membership| %>
         <div class="form-inputs">
-          <%= f.input :name%>
+          <%= membership.user.name %>
         </div>
-        <%= f.text_field :inv_code, value: SecureRandom.hex(10).to_s, class: 'd-none' %>
+        <div class="form-inputs">
+          <%= membership.departure %>
+        </div>
+        <div class="form-inputs">
+          <%= membership.travel_date %>
+        </div>
+        <div class="form-inputs">
+          <%= membership.return_date %>
+        </div>
         <div class="form-actions">
-          <%= f.button :submit,  "Create a Trip", class: "btn btn-primary" %>
+          <%= button_to "Modify", edit_group_membership_path(membership), class: "btn btn-primary" %>
+        </div>
+        <div class="form-actions">
+          <%# <%= button_to "Go to Destinations", destinations_path(membership), class: "btn btn-primary" %> %>
         </div>
       <% end %>
     </div>

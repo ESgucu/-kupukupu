@@ -1,22 +1,45 @@
 class MembershipsController < ApplicationController
-  # def index
+  def index
+    @memberships = Membership.where(user: current_user, group: @group)
+    @group = Group.find(params[:group_id])
+  end
 
-  # end
+  def new
+    @group = Group.find(params[:group_id])
+    @membership = Membership.new
+    redirect_to group_path(@group) unless Membership.where(user: current_user, group: @group).empty?
 
-  # def new
+    # if current user is not a membership of the group do:
+    creator = current_user == @group.user
+    invitation = params[:inv] == @group.inv_code
+    unless creator || invitation
+      redirect_to groups_path
+    end
+  end
 
-  # end
+    def create
+    @membership = Membership.new(membership_params)
+    if @group.memberships.where(user_id: current_user.id).exists?
+      @membership.user_id = membership_params[:user_id]
+    else
+      @membership.user = current_user
+    end
+    @membership.save
+    redirect_to group_membership_path(@group)
+  end
 
-  # def create
-
-  # end
-
-  # def update
-
-  # end
-
+  def destroy
+    @group = Group.find(params[:group_id])
+    @membership = Membership.find(params[:id])
+    @membership.destroy
+    respond_to do |format|
+      format.html { redirect_to group_path(@membership.group), notice: 'Membership was successfully deleted.' }
+      format.json { head :no_content }
+    end
+  end
 
   def membership_params
+    params.require(:membership).permit(:departure, :travel_date, :return_date, :group_id, :user_id)
   end
 
 end

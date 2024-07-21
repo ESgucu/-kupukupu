@@ -7,12 +7,12 @@
   <div class="row justify-content-center">
     <div class="col-12">
       <h1 class="my-3">Create a Trip</h1>
-      <form action="/groups/new">
-        <label for="group">Create a Trip</label>
-        <input class="form-inputs" type="text" name="groupName" placeholder = "Trip Name">
-        <input type="submit" class="btn btn-primary">
-        If submitted, hide the form and get the name info to save the group.
-      </form>
+      <%= form_for(@group) do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.text_field :inv_code, value: SecureRandom.hex(10).to_s, class: 'd-none' %>
+        <%= f.submit %>
+      <% end %>
     </div>
   </div>
 </div>

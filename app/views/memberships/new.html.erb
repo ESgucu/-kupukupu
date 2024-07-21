@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-12">
+      <%= link_to groups_path, class: "btn btn-secondary" do %>
+        <i class="fa-solid fa-arrow-left"></i> Back
+      <% end %>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-12">
+      <h2><%= @group.name %></h2>
+      <%= form_for(@membership, url: group_memberships_path(@group)) do |f| %>
+        <%= f.hidden_field :group_id, value: @group.id %>
+        <!-- First membership, use current user -->
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <div class="form-group">
+          <%= f.label :departure %>
+          <%= f.text_field :departure, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :travel_date, "Departure Date" %>
+          <%= f.date_field :travel_date, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :return_date, "Return Date" %>
+          <%= f.date_field :return_date, class: "form-control" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Save", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <button class="plus-button-primary" data-controller='share' data-action='click->share#share' data-share-title-value='<%= @group.name.capitalize %>' data-share-text-value='Join the trip' data-share-url-value='<%= request.url %>/memberships/new?inv=<%= @group.inv_code %>'>
+        <i class="fa-solid fa-plus fa-2xl" style="color: rgb(3, 64, 61);"></i>
+      </button>
+      <!-- Edit Group Name -->
+    </div>
+  </div>
+</div>
+<%console%>

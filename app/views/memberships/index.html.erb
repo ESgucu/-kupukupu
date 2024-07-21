@@ -8,26 +8,26 @@
   </div>
   <div class="row my-3">
     <div class="col-12">
-      <h2>Your Groups</h2>
-      <% if @groups.any? %>
+      <h2>The travellers</h2>
+      <% if @memberships.any? %>
         <ul class="list-group">
-          <% @groups.each do |group| %>
+          <% @memberships.each do |membership| %>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              <%= group.name %>
+              <%= membership.user.name %>
               <div>
-                <%= link_to "Open", group_path(group), class: "btn btn-info btn-sm" %>
+                <%= link_to "Open", group_membership_path(group_id: @group.id, id: membership.id), class: "btn btn-info btn-sm" %>
               </div>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <p>You have no groups yet. <%= link_to "Create a new group", new_group_path %>.</p>
+        <p>No travellers yet <%= link_to "Add a new traveler", new_group_membership_path %>.</p>
       <% end %>
     </div>
   </div>
   <div class="row my-3">
     <div class="col-12">
-      <%= link_to "New Group", new_group_path, class: "btn btn-primary" %>
+      <%= link_to "Add a new traveller", new_group_membership_path, class: "btn btn-primary" %>
     </div>
   </div>
 </div>

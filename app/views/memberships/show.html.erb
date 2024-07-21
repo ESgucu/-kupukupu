@@ -8,26 +8,35 @@
   </div>
   <div class="row my-3">
     <div class="col-12">
-      <h3 class="text-center"><%= @group.name %></h3>
+      <h2><%= @group.name %></h2>
       <ul class="list-group">
         <% @memberships.each do |membership| %>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
               <%= membership.user.name %>
-            </div>
-            <div class="d-flex align-items-center">
-              <%= membership.departure %>
-            </div>
-            <div class="d-flex align-items-center">
-              <%= membership.travel_date %>
-            </div>
-            <div class="d-flex align-items-center">
-              <%= membership.return_date %>
-            </div>
-            <div class="d-flex align-items-center">
               <%= link_to edit_group_membership_path(group_id: @group.id, id: membership.id), class: "ms-2" do %>
                 <i class="fa fa-pen"></i>
               <% end %>
+            </div>
+            <div class="d-flex align-items-center">
+              <%= membership.departure %>
+              <%= link_to edit_group_membership_path(group_id: @group.id, id: membership.id), class: "ms-2" do %>
+                <i class="fa fa-pen"></i>
+              <% end %>
+            </div>
+            <div class="d-flex align-items-center">
+              <%= membership.travel_date %>
+              <%= link_to edit_group_membership_path(group_id: @group.id, id: membership.id), class: "ms-2" do %>
+                <i class="fa fa-pen"></i>
+              <% end %>
+            </div>
+            <div class="d-flex align-items-center">
+              <%= membership.return_date %>
+              <%= link_to edit_group_membership_path(group_id: @group.id, id: membership.id), class: "ms-2" do %>
+                <i class="fa fa-pen"></i>
+              <% end %>
+            </div>
+            <div class="d-flex align-items-center">
               <%= link_to edit_group_membership_path(group_id: @group.id, id: membership.id), class: "ms-2" do %>
                 <i class="fa fa-trash"></i>
               <% end %>
@@ -35,11 +44,7 @@
           </li>
         <% end %>
       </ul>
-      <div class="row my-3">
-        <div class="col-12">
-          <%= link_to "Add new Travellers", new_group_path, class: "btn btn-primary" %>
-        </div>
-      </div>
+      <!-- Edit Group Name -->
     </div>
   </div>
 </div>

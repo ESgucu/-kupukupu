@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-12">
+      <%= link_to groups_path, class: "btn btn-secondary" do %>
+        <i class="fa-solid fa-arrow-left"></i> Back
+      <% end %>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-12">
+      <h2><%= @group.name %></h2>
+      <!-- Edit Group Name -->
+      <div class="mb-4">
+        <%= form_with(model: @group, local: true) do |f| %>
+          <div class="form-group">
+            <%= f.label :name, "Group Name" %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Update Group Name', class: 'btn btn-primary mt-2' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%console%>

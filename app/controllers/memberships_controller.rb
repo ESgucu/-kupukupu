@@ -2,6 +2,7 @@ class MembershipsController < ApplicationController
   def index
     @memberships = Membership.where(user: current_user, group: @group)
     @group = Group.find(params[:group_id])
+    @groups = Group.where(user:current_user)
   end
 
   def new
@@ -10,10 +11,10 @@ class MembershipsController < ApplicationController
     redirect_to group_path(@group) unless Membership.where(user: current_user, group: @group).empty?
 
     # if current user is not a membership of the group do:
-    creator = current_user == @group.user
+    creator = current_user.id == @group.user_id
     invitation = params[:inv] == @group.inv_code
     unless creator || invitation
-      redirect_to groups_path
+      redirect_to group_path(@group)
     end
   end
 

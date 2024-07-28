@@ -1,0 +1,9 @@
+<div id="form_group">
+  <%= form_for(group) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.text_field :inv_code, value: SecureRandom.hex(10).to_s, class: 'd-none' %>
+    <%= f.text_field :user_id, value: current_user.id, class: 'd-none' %>
+    <%= f.submit %>
+  <% end %>
+</div>

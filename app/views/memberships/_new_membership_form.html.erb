@@ -1,0 +1,25 @@
+<div id="form_membership">
+  <%= form_for(membership, url: group_memberships_path(@group)) do |f| %>
+    <!-- First membership, use current user -->
+    <% if @count == 0 %>
+      <div class="form-group">
+        <%= f.text_field :user_id, value: current_user.id, class: "form-control d-none" %>
+      <%end%>
+    </div>
+    <div class="form-group">
+      <%= f.label :departure %>
+      <%= f.text_field :departure, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :travel_date, "Departure Date" %>
+      <%= f.date_field :travel_date, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :return_date, "Return Date" %>
+      <%= f.date_field :return_date, class: "form-control" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Save", class: "btn btn-primary"%>
+    </div>
+  <% end %>
+</div>

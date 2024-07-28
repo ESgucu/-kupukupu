@@ -1,46 +1,43 @@
 class MembershipsController < ApplicationController
   def index
-    @memberships = Membership.where(user: current_user, group: @group)
-    @group = Group.find(params[:group_id])
-    @groups = Group.where(user:current_user)
+
   end
 
   def new
     @group = Group.find(params[:group_id])
     @membership = Membership.new
-    redirect_to group_path(@group) unless Membership.where(user: current_user, group: @group).empty?
-
-    # if current user is not a membership of the group do:
-    creator = current_user.id == @group.user_id
-    invitation = params[:inv] == @group.inv_code
-    unless creator || invitation
-      redirect_to group_path(@group)
-    end
+    @count = Membership.where(group:@group).count
   end
 
-    def create
+  def create
     @membership = Membership.new(membership_params)
-    if @group.memberships.where(user_id: current_user.id).exists?
-      @membership.user_id = membership_params[:user_id]
+    @group = Group.find(params[:group_id])
+    @count = Membership.where(group:@group).count
+    @membership.group = @group
+    if @count == 0
+      @membership.user_id = current_user.id
     else
-      @membership.user = current_user
+      @inv_code = @group.inv_code
+
+      @user = User.new(params[:name])
+      @user.save!
+      @membership.user= @user
     end
-    @membership.save
-    redirect_to group_membership_path(@group)
+    @membership.save!
+    redirect_to group_membership_path(@group,@membership )
+  end
+
+  def show
+    @group = Group.find(params[:group_id])
+    @membership = Membership.find(params[:id])
+    @memberships = Membership.where(group:@group)
   end
 
   def destroy
-    @group = Group.find(params[:group_id])
-    @membership = Membership.find(params[:id])
-    @membership.destroy
-    respond_to do |format|
-      format.html { redirect_to group_path(@membership.group), notice: 'Membership was successfully deleted.' }
-      format.json { head :no_content }
-    end
+
   end
 
   def membership_params
-    params.require(:membership).permit(:departure, :travel_date, :return_date, :group_id, :user_id)
+    params.require(:membership).permit( :departure, :travel_date, :return_date)
   end
-
 end

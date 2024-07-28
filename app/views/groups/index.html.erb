@@ -1,27 +1,20 @@
 <div class="container">
   <div class="row my-3">
     <div class="col-12">
-      <%= link_to :back, class: "btn btn-secondary" do %>
-        <i class="fa-solid fa-arrow-left"></i> Back
-      <% end %>
-    </div>
-  </div>
-  <div class="row my-3">
-    <div class="col-12">
       <h2>Your Groups</h2>
-      <% if @groups.any? %>
+      <% if @memberships.any? %>
         <ul class="list-group">
-          <% @groups.each do |group| %>
+          <% @memberships.each do |membership| %>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              <%= group.name %>
+              <%= membership.group.name %>
               <div>
-                <%= link_to "Open", group_path(group), class: "btn btn-info btn-sm" %>
+                <%= link_to "Open", group_path(membership.group), class: "btn btn-info btn-sm" %>
               </div>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <p>You have no groups yet. <%= link_to "Create a new group", new_group_path %>.</p>
+        <p>You have no groups yet.</p>
       <% end %>
     </div>
   </div>
